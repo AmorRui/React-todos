@@ -11,7 +11,7 @@ export default class List extends React.Component {
 					{
 						// 5》》 className={ item.completed?"completed":"" }
 						// 6》》 key={ item.id }
-						this.props.tasklist.map((item,i) => {
+						this.props.tasklist.map( (item,i) => {
 							return <li className={ item.completed?"completed":"" } key={ item.id }>
 									<div className="view">
 									{/* 7 》》 checked = { item.completed }
@@ -19,7 +19,9 @@ export default class List extends React.Component {
 										<input className="toggle" type="checkbox" checked = { item.completed }/>
 										{/* 4》》 item.name  显示 */}
 										<label>{ item.name }</label>
-										<button className="destroy"></button>
+										<button className="destroy" onClick = { () => {
+											this.props.delTask( item.id )
+										} }></button>
 									</div>
 									<input className="edit" value="Create a TodoMVC template" />
 								</li> 

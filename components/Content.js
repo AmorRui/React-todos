@@ -28,12 +28,25 @@ export default class Comtent extends React.Component {
     //  Application（local Stronge） 会进行显示数据
     localStorage.setItem('tasks',JSON.stringify(this.state.list))
   }
+  // 删除 
+  delTask (id) {
+    // filter 过滤器 返回一个新的数组
+    this.state.list = this.state.list.filter( (item) => {
+      return item.id != id
+    })
+    this.setState({
+    })
+  }
+  // 让localstroge  进行删除
+  componentWillUpdate () {
+    this.state.list  = JSON.parse(localStorage.getItem('tasks')||('[]'));
+  }
   render () {
     return <div>
       <section className="todoapp">
         <Add addTask =  {this.addTask }/>
-        {/* 2》回传数据 */}
-        <List tasklist = { this.state.list }/>
+        {/* 2》回传数据  */}
+        <List tasklist = { this.state.list } delTask = { this.delTask }/>
         <Footer />
       </section>
     </div>
