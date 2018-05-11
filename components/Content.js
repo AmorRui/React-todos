@@ -13,7 +13,6 @@ export default class Comtent extends React.Component {
   }
   // 持久化保存数据。 页面刷新数据仍然存在
   componentWillMount () {
-
     //  this.state.list  = JSON.parse(localStorage.getItem('task'));
     //  如果list 是空的。 map 会为空。 需要进行判断
     this.state.list  = JSON.parse(localStorage.getItem('tasks')||('[]'));
@@ -29,7 +28,7 @@ export default class Comtent extends React.Component {
     localStorage.setItem('tasks',JSON.stringify(this.state.list))
   }
   // 删除 
-  delTask (id) {
+  delTask = (id) => {
     // filter 过滤器 返回一个新的数组
     this.state.list = this.state.list.filter( (item) => {
       return item.id != id
@@ -39,7 +38,7 @@ export default class Comtent extends React.Component {
   }
   // 让localstroge  进行删除
   componentWillUpdate () {
-    this.state.list  = JSON.parse(localStorage.getItem('tasks')||('[]'));
+    localStorage.setItem('tasks', JSON.stringify(this.state.list));
   }
   render () {
     return <div>
