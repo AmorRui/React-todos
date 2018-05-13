@@ -16,7 +16,7 @@ export default class Footer extends React.Component {
 						<a href="#/completed">Completed</a>
 					</li>
 				</ul>
-				<button className="clear-completed"  className={this.props.all != this.props.left ? "clear-completed" : ''} onClick = { () => {
+				<button className={this.props.all != this.props.left ? "clear-completed" : ''} onClick = { () => {
 					this.props.clearCompletedTask()
 				}}>Clear completed</button>
 			</footer>

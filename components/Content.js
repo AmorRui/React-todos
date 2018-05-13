@@ -71,6 +71,7 @@ export default class Comtent extends React.Component {
             return !item.isCompleted
           }).length
          } 
+         all = { this.state.list.length }
          clearCompletedTask = { this.clearCompletedTask }/>
       </section>
     </div>
