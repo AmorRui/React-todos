@@ -33,6 +33,12 @@ export default class List extends React.Component {
 						// 5》》 className={ item.completed?"completed":"" }
 						// 6》》 key={ item.id }
 						this.props.tasklist.map( (item,i) => {
+							if( this.props.flag === 'Active' &&  item.isCompleted ){
+								return '';
+							}
+							if( this.props.flag === 'Completed' &&  !item.isCompleted ){
+								return '';
+							}
 							return <li className={ (item.isCompleted?"completed":"")+(item.id === this.state.eid ? 'editing':'') } onDoubleClick = {
 								() => {
 									// 让内容可以进行编辑

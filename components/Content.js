@@ -8,7 +8,8 @@ export default class Comtent extends React.Component {
   constructor () {
     super();
     this.state = {
-      list:[]
+      list:[],
+      flag:'All'
     }
   }
   // 持久化保存数据。 页面刷新数据仍然存在
@@ -43,7 +44,13 @@ export default class Comtent extends React.Component {
     }) 
   } 
   
-  
+  // 切换列表显示内容
+changeFlag = (flag)=> {
+  this.setState({
+    flag : flag
+  })
+}
+
   // 清除所有已经完成的任务
   clearCompletedTask = () => {
     this.state.list = this.state.list.filter ((item) => {
@@ -64,15 +71,17 @@ export default class Comtent extends React.Component {
 
         <Add addTask =  {this.addTask }/>
 
-        <List tasklist = { this.state.list } delTask = { this.delTask } upData = { this.upData }/>
+        <List tasklist = { this.state.list } flag = {this.state.flag } delTask = { this.delTask } upData = { this.upData }/>
 
         <Footer left ={ 
           this.state.list.filter((item)=>{
             return !item.isCompleted
           }).length
          } 
+         flag = { this.state.flag }
          all = { this.state.list.length }
-         clearCompletedTask = { this.clearCompletedTask }/>
+         clearCompletedTask = { this.clearCompletedTask }
+         changeFlag = { this.changeFlag }/>
       </section>
     </div>
  }
