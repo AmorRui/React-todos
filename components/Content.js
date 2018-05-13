@@ -53,7 +53,11 @@ export default class Comtent extends React.Component {
         <Add addTask =  {this.addTask }/>
         {/* 2》回传数据  */}
         <List tasklist = { this.state.list } delTask = { this.delTask } upData = { this.upData }/>
-        <Footer />
+        <Footer left ={ 
+          this.state.list.filter((item)=>{
+            return !item.isCompleted
+          }).length
+         }/>
       </section>
     </div>
  }
