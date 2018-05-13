@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default class List extends React.Component {
+	constructor () {
+		super()
+		this.state = {
+			eid : -1
+		}
+	}
   render () {
     return <div>
       <section className="main">
@@ -12,7 +18,17 @@ export default class List extends React.Component {
 						// 5》》 className={ item.completed?"completed":"" }
 						// 6》》 key={ item.id }
 						this.props.tasklist.map( (item,i) => {
-							return <li className={ item.isCompleted?"completed":"" } key={ item.id }>
+							return <li className={ (item.isCompleted?"completed":"")+(item.id === this.state.eid ? 'editing':'') } onDoubleClick = {
+								() => {
+									// 让内容可以进行编辑
+									this.setState({
+										eid:item.id
+									}),() => {
+										//  双击出现光标
+											this.refs[item.id].focus();
+									}
+								}
+							} key={ item.id }>
 									<div className="view">
 									{/* 7 》》 checked = { item.completed }
 									8 》》 刷新页面，之前的数据已经消失。 需要再次保存数据*/}
@@ -28,7 +44,17 @@ export default class List extends React.Component {
 											this.props.delTask( item.id )
 										} }></button>
 									</div>
-									<input className="edit" value="Create a TodoMVC template" />
+									<input ref ={ item.id } className="edit" onChange= { 
+										// 编辑数据更新
+										(e)=> {
+										item.name = e.target.value;
+										this.props.upData();
+									} } value={item.name} onBlur = {()=> {
+										// 失去焦点
+										this.setState({
+											eid = -1
+										})
+									} }/>
 								</li> 
 						})
 					}
