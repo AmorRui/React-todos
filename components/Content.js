@@ -41,7 +41,18 @@ export default class Comtent extends React.Component {
     this.setState({
 
     }) 
-  }  
+  } 
+  
+  
+  // 清除所有已经完成的任务
+  clearCompletedTask = () => {
+    this.state.list = this.state.list.filter ((item) => {
+      return !item.isCompleted
+    })
+    this.setState({
+
+    })
+  }
   
   // 让localstroge  进行删除
   componentWillUpdate () {
@@ -50,14 +61,17 @@ export default class Comtent extends React.Component {
   render () {
     return <div>
       <section className="todoapp">
+
         <Add addTask =  {this.addTask }/>
-        {/* 2》回传数据  */}
+
         <List tasklist = { this.state.list } delTask = { this.delTask } upData = { this.upData }/>
+
         <Footer left ={ 
           this.state.list.filter((item)=>{
             return !item.isCompleted
           }).length
-         }/>
+         } 
+         clearCompletedTask = { this.clearCompletedTask }/>
       </section>
     </div>
  }
