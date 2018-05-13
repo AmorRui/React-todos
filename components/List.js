@@ -10,7 +10,22 @@ export default class List extends React.Component {
   render () {
     return <div>
       <section className="main">
-				<input id="toggle-all" className="toggle-all" type="checkbox" />
+			{/* 全选  反选 */}
+			{
+				(() => {
+					var left = this.props.tasklist.filter((item) => {
+					return !item.isCompleted
+				})
+				return	<input id="toggle-all" className="toggle-all" type="checkbox" checked = { left.length == 0 } onChange ={ () => {
+					this.props.tasklist.map((item,i) => {
+						item.isCompleted = !item.isCompleted;
+						this.props.upData();
+					})
+				} }/>
+				})()
+			
+			}
+			
 				<label htmlFor="toggle-all">Mark all as complete</label>
 				<ul className="todo-list">
 					{/* 3》》动态生成li 使用map方法*/}
@@ -52,7 +67,7 @@ export default class List extends React.Component {
 									} } value={item.name} onBlur = {()=> {
 										// 失去焦点
 										this.setState({
-											eid = -1
+											eid: -1
 										})
 									} }/>
 								</li> 
