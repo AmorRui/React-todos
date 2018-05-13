@@ -12,11 +12,16 @@ export default class List extends React.Component {
 						// 5》》 className={ item.completed?"completed":"" }
 						// 6》》 key={ item.id }
 						this.props.tasklist.map( (item,i) => {
-							return <li className={ item.completed?"completed":"" } key={ item.id }>
+							return <li className={ item.isCompleted?"completed":"" } key={ item.id }>
 									<div className="view">
 									{/* 7 》》 checked = { item.completed }
 									8 》》 刷新页面，之前的数据已经消失。 需要再次保存数据*/}
-										<input className="toggle" type="checkbox" checked = { item.completed }/>
+										<input className="toggle" type="checkbox" checked = { item.isCompleted } onChange = { () => {
+											// 状态改变
+											item.isCompleted = !item.isCompleted;
+											// 调用父组件的setState方法
+											this.props.upData ()
+										} } />
 										{/* 4》》 item.name  显示 */}
 										<label>{ item.name }</label>
 										<button className="destroy" onClick = { () => {

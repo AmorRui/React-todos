@@ -36,6 +36,13 @@ export default class Comtent extends React.Component {
     this.setState({
     })
   }
+  // 让父组件刷新
+  upData = () => {
+    this.setState({
+
+    }) 
+  }  
+  
   // 让localstroge  进行删除
   componentWillUpdate () {
     localStorage.setItem('tasks', JSON.stringify(this.state.list));
@@ -45,7 +52,7 @@ export default class Comtent extends React.Component {
       <section className="todoapp">
         <Add addTask =  {this.addTask }/>
         {/* 2》回传数据  */}
-        <List tasklist = { this.state.list } delTask = { this.delTask }/>
+        <List tasklist = { this.state.list } delTask = { this.delTask } upData = { this.upData }/>
         <Footer />
       </section>
     </div>
