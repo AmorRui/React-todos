@@ -1,5 +1,13 @@
-Todos
+# React--Todos
 
+## 使用React构建TODOS
+
+## 启动
+
+>   yarn
+>   yarn dev
+
+## 功能描述
 1.根据页面效果  划分组件
 2.创建组件
 Box -- 外层盒子
